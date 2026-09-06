@@ -14,25 +14,25 @@
 
 **Screenshot Hasil Run:**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Warmup_Normal.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Warmup_Normal.png)
 
 **menghapus Expanded pada baris nama**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Warmup_1.png.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Warmup_1.png)
 
 **Penjelasan**
 Jika Expanded di hilangkan dan nama terlalu panjang maka akan ada tanda garis kuning (overflow) di dalam kartu
 
 **Ganti mainAxisSize: MainAxisSize.min**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Warmup_2.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Warmup_2.png)
 
 **Penjelasan**
 Jika Di Ganti dengan kode tersebut maka card akan memenuhi satu layar
 
 **Menambahkan Email Di dalam Card**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Warmup_3.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Warmup_3.png)
 
 ---
 
@@ -40,27 +40,27 @@ Jika Di Ganti dengan kode tersebut maka card akan memenuhi satu layar
 
 **Hasil dari run kode sebelum menggunakan StatefulWidget dan Cupertino**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Praktikum_1.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Praktikum_1.png)
 
  **Penjelasan**
  Disini Terlihat bahwa aplikasi tidak bisa digunakan untuk mengubah warna tema (gelap / terang)
 
  **Hasil Dari run kode setelah Menggunakan StatefulWidget dan Cupertino**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Praktikum_2.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Praktikum_2.png)
 
  **Penjelasan**
  Disini Terlihat bahwa aplikasi telah bisa digunakan untuk mengubah warna tema (gelap / terang) menggunakan tombol switch di atas
 
 **Hasil Dari run Setelah breakpoint diubah menjadi 700**
-> ![ScreenShoot Hasil ui](Screeshoot/Praktikum_3.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Praktikum_3.png)
 
  **Penjelasan**
  Bisa kita lihat jika Card akan berubah menjadi besar setelah diganti menjadi 700
 
  **Mengubah themeMode menajadi ThemeMode.dark lalu kembalikan ke ThemeMode.System**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Praktikum_2.png)
+> ![ScreenShoot Hasil ui](ScreeShoot/Praktikum_2.png)
 
 
   **Penjelasan**
@@ -68,11 +68,11 @@ Jika Di Ganti dengan kode tersebut maka card akan memenuhi satu layar
 
 **Melihat hasil Jika digunakan dalam ukuran yang berbeda (ukuran laptop)**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Praktikum_4.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Praktikum_4.png)
 
 **hasil dari Penambahan Semantics**
 
-> ![ScreenShoot Hasil ui](Screeshoot/Praktikum_5.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Praktikum_5.png)
 
 
 
