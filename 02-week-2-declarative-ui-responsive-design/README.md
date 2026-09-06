@@ -60,7 +60,7 @@ Jika Di Ganti dengan kode tersebut maka card akan memenuhi satu layar
 
  **Mengubah themeMode menajadi ThemeMode.dark lalu kembalikan ke ThemeMode.System**
 
-> ![ScreenShoot Hasil ui](ScreeShoot/Praktikum_2.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/Praktikum_2.png)
 
 
   **Penjelasan**
@@ -84,7 +84,7 @@ Tidak ada yang berbeda dalam UI tapi kode akan mempermudah untuk penggunaan oran
 
 **Hasil ScreenShoot Akhir**
 
-> ![ScreenShoot Hasil ui](Screeshoot/TugasPraktikum.png)
+> ![ScreenShoot Hasil ui](ScreenShoot/TugasPraktikum.png)
 
 
 **Refleksi**
