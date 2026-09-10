@@ -7,7 +7,7 @@ class ProductsNotifier extends AsyncNotifier<List<String>> {
   Future<List<String>> build() async {
     // Simulasi loading selama 2 detik
     await Future.delayed(const Duration(seconds: 2)); 
-    return ['Keyboard', 'Mouse', 'Monitor'];
+    throw Exception('Gagal memuat produk'); // Simulasi error
   }
 
   Future<void> refresh() async {
