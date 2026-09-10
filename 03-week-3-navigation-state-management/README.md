@@ -1,17 +1,29 @@
-# week3_navigation
+# Laporan Praktikum Minggu 3 - Navigation state Management
 
-A new Flutter project.
+---
 
-## Getting Started
+## Identitas Mahasiswa 
+* **Nama:** Muhammad Nawfal Mawla Azhar
+* **NIM:** 244107020174
+* **Kelas:** 3G-TI
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 1. Aplikasi Multi page dengan GoRouter
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+**Screenshot Hasil Run:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> ![ScreenShoot Hasil Multi Page dengan Router (home)](ScreenShoot/Praktikum1_home.png)
+
+> ![ScreenShoot Hasil Multi Page dengan Router (detail)](ScreenShoot/Praktikum1_detail.png)
+
+## 2. Aplikasi ToDo dengan Riverpod
+
+> ![ScreenShoot Hasil Aplikasi ToDo (home)](ScreenShoot/Praktikum2_home.png)
+
+> ![ScreenShoot Hasil Aplikasi ToDo (detail)](ScreenShoot/Praktikum2_Tambah.png)
+
+## 3.  asyncValue: Loading, error, success
+
+
+
