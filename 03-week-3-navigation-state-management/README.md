@@ -29,15 +29,21 @@ ScreenShoot Page Detail:
 
 ## 3.  asyncValue: Loading, error, success
 
+ScreenShoot Hasil Run Sukses
 > ![ScreenShoot Hasil Run Sukses](ScreenShoot/Praktikum3_sukses.png)
+
 **Penjelasan**
 Saat Menjalankan Aplikasi Usera kaan melihat lingkarn loading berputar selama beberapa detik lalu memunculkan daftar barang (keyboard, mouse dan monitor)
 
+ScreenShoot Hasil Run Gagal
 > ![ScreenShoot Hasil Run gagal](ScreenShoot/Praktikum3_gagal.png)
+
 **Penjelasan**
 Saat (return[keyboard...]) di ganti menjadi Throw exception('gagal terhubung ke server'), maka akan memunculkan pesan yang menunjukan  gagal memuat
 
+ScreenShoot Hasil Run Gagal lalu load ulang
 > ![ScreenShoot Hasil Run Recovery gagal](ScreenShoot/Praktikum3_sukses.png)
+
 **Penjelasan**
 Saat Mengeklik tombol muat ulang di dalam aplikasi maka akan terload kembali barang yang ada (mouse, keyboard dan komputer)
 
@@ -69,10 +75,34 @@ Tidak. Kode sudah menggunakan AsyncNotifier dan AsyncNotifierProvider yang merup
 
 ## 5. Refactoring and Testing
 
-
+Mengurangi Kode di Bagian Main : 
 > ![ScreenShoot Hasil Run Sukses](ScreenShoot/Praktikum5_kode1.png)
 
+Menambahkan Class baru di bawah kode yang sudah ada :
 > ![ScreenShoot Hasil Run Sukses](ScreenShoot/Praktikum5_kode2.png)
 
 
 ## 6. Tugas, Refleksi dan referensi
+
+1. Kapan setState masih cukup, dan kapan state harus naik ke Riverpod?
+
+- setState masih cukup digunakan untuk status lokal yang hanya beroperasi dan berdampak pada satu widget tunggal, contohnya animasi loading pada satu tombol spesifik
+
+- Riverpod diperlukan saat state tersebut adalah status global yang perlu dibagikanatau diakses oleh berbagai halaman berbeda
+
+2. Apa perbedaan context.go dan context.push, dan kapan masing-masing tepat digunakan?
+
+- context.go Berpindah ke rute baru dengan mengganti tumpukan riwayat jalaman yang ada berdasarkan definisi URL
+
+- context.push Menupuk halaman baru di atas halaman saat ini (digunakan untuk melihat halaman detail)
+
+3. Bagaimana AsyncValue mencegah bug dibanding tiga boolean terpisah?
+
+- Jika menggunakan tiga boolean terpisah, makaakan sangat mudah terjadi bug keadaan tidak konsisten, maka lebih baik menggunakan konsep union type
+
+4. Bagian Mana dari hasil AI yang ada perbaiki ?
+
+- tipe data Array pada test : AI memberikan return list kosongpada penanganan error di file file test, yang menyebabkan error type mismatch karena Dart membacanya sebagai List<dynamic>, sementara providersecara ketat meminta List<string>
+
+- Jalur import File yang salah : AI terkadang masih memberikan rute import yang relatif salah,  sehingga akan ditolak saat dipanggil dalam folder test
+
