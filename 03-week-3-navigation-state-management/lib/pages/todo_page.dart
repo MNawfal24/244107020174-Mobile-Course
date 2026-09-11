@@ -14,25 +14,11 @@ class TodoPage extends ConsumerWidget {
       body: todos.isEmpty
           ? const Center(child: Text('Belum ada tugas'))
           : ListView.builder(
-              itemCount: todos.length,
-              itemBuilder: (context, index) => ListTile(
-                leading: Checkbox(
-                  value: todos[index].done,
-                  onChanged: (_) =>
-                      ref.read(todoListProvider.notifier).toggle(index),
-                ),
-                title: Text(
-                  todos[index].title,
-                  style: TextStyle(
-                      decoration: todos[index].done
-                          ? TextDecoration.lineThrough
-                          : null),
-                ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () =>
-                      ref.read(todoListProvider.notifier).remove(index),
-                ),
+              itemBuilder: (context, index) => TodoTile(
+                title: todos[index].title,
+                isCompleted: todos[index].done,
+                onToggle: () => ref.read(todoListProvider.notifier).toggle(index),
+                onDelete: () => ref.read(todoListProvider.notifier).remove(index),
               ),
             ),
       floatingActionButton: FloatingActionButton(
@@ -66,6 +52,37 @@ class TodoPage extends ConsumerWidget {
             child: const Text('Tambah'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class TodoTile extends StatelessWidget {
+  final String title;
+  final bool isCompleted;
+  final VoidCallback onToggle;
+  final VoidCallback onDelete;
+
+  const TodoTile({
+    super.key,
+    required this.title,
+    required this.isCompleted,
+    required this.onToggle,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        title,
+        style: TextStyle(
+          decoration: isCompleted ? TextDecoration.lineThrough : null,
+        ),
+      ),
+      leading: Checkbox(
+        value: isCompleted,
+        onChanged: (_) => onToggle(),
       ),
     );
   }
