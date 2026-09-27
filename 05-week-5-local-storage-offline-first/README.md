@@ -1,17 +1,35 @@
-# week5_offline
+# Laporan Praktikum Minggu 5-Local Storage Offline First
 
-A new Flutter project.
+---
 
-## Getting Started
+## Identitas Mahasiswa 
+* **Nama:** Muhammad Nawfal Mawla Azhar
+* **NIM:** 244107020174
+* **Kelas:** 3G-TI
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## DOKUMENTASI SCREENSHOOT
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+**Screenshot Hasil Run:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> ![ScreenShoot](ScreenShoot/JS5.png)
+
+
+## Refleksi
+
+### 1. Mengapa daftar catatan tidak boleh disimpan di SharedPreferences?
+
+Karena SharedPreferences hanya cocok untuk data sederhana berupa key-value. Kalau daftar catatan disimpan di sana, semua data harus diubah menjadi JSON dan akan sulit saat mencari, mengubah, atau menghapus satu catatan. SQLite lebih cocok untuk kebutuhan CRUD.
+
+### 2. Kapan cache-first cukup?
+
+Cache-first cukup untuk data yang tidak harus selalu terbaru, seperti catatan. Untuk data seperti harga, stok, atau status pembayaran, lebih baik menggunakan network-first agar data yang ditampilkan tetap terbaru.
+
+### 3. Bagaimana dirty flag menjadi antrean sync tanpa memblokir UI?
+
+Saat ada perubahan, data langsung disimpan ke lokal dan diberi `dirty = 1`. UI tidak perlu menunggu proses server. Saat sync berjalan, catatan dirty diproses lalu diubah menjadi `dirty = 0`. Tabel outbox diperlukan jika setiap operasi create, update, dan delete harus dicatat serta bisa diulang ketika gagal.
+
+### 4. Bagian rekomendasi AI yang ditolak
+
+Saya menolak rekomendasi untuk menyimpan semua catatan sebagai JSON di SharedPreferences. Memang lebih cepat dibuat, tetapi akan menyulitkan proses CRUD. Saya memilih SQLite karena lebih rapi dan sesuai untuk data catatan.
