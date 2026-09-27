@@ -32,4 +32,4 @@ Saat ada perubahan, data langsung disimpan ke lokal dan diberi `dirty = 1`. UI t
 
 ### 4. Bagian rekomendasi AI yang ditolak
 
-Saya menolak rekomendasi untuk menyimpan semua catatan sebagai JSON di SharedPreferences. Memang lebih cepat dibuat, tetapi akan menyulitkan proses CRUD. Saya memilih SQLite karena lebih rapi dan sesuai untuk data catatan.
+Saya menolak rekomendasi penggunaan Drift atau Hive untuk penyimpanan utama catatan dalam skala tugas praktikum dasar ini, dan memilih SQLite murni
