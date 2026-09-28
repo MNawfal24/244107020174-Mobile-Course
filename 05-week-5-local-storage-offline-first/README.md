@@ -1,3 +1,4 @@
+
 # Laporan Praktikum Minggu 5-Local Storage Offline First
 
 ---
@@ -14,6 +15,8 @@
 **Screenshot Hasil Run:**
 
 > ![ScreenShoot](ScreenShoot/JS5.png)
+
+> ![ScreenShoot](ScreenShoot/JS5_2.png)
 
 
 ## Refleksi
@@ -32,4 +35,4 @@ Saat ada perubahan, data langsung disimpan ke lokal dan diberi `dirty = 1`. UI t
 
 ### 4. Bagian rekomendasi AI yang ditolak
 
-Saya menolak rekomendasi penggunaan Drift atau Hive untuk penyimpanan utama catatan dalam skala tugas praktikum dasar ini, dan memilih SQLite murni
+Saya menolak rekomendasi penggunaan Drift atau Hive untuk penyimpanan utama catatan dalam skala tugas praktikum dasar ini, dan memilih SQLite murnia
