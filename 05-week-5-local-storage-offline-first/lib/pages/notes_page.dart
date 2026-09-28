@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/providers.dart';
 import '../data/local/note.dart';
-import 'setting_page.dart'; // Sesuaikan lokasi DarkModeNotifier Anda
+import '../widgets/note_title.dart';
+import 'notes_detail_page.dart';
+import 'setting_page.dart';
+import 'settings_page.dart';
 
 // Provider untuk mengambil daftar catatan dari SQLite
 final notesProvider = FutureProvider.autoDispose<List<Note>>((ref) async {
@@ -44,9 +47,20 @@ class NotesPage extends ConsumerWidget {
             onPressed: () async {
               final repo = ref.read(noteRepositoryProvider);
               await syncNotes(repo);
+              if (!context.mounted) return;
               ref.invalidate(notesProvider); // Refresh UI setelah sync
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Sinkronisasi selesai!')),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Pengaturan',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SettingsPage()),
               );
             },
           ),
@@ -57,7 +71,7 @@ class NotesPage extends ConsumerWidget {
           // Banner Terakhir Dibuka
           Container(
             width: double.infinity,
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               lastOpenedAsync.when(
@@ -65,7 +79,7 @@ class NotesPage extends ConsumerWidget {
                     ? 'Terakhir dibuka: $date' 
                     : 'Terakhir dibuka: Belum pernah',
                 loading: () => 'Memuat...',
-                error: (_, __) => 'Gagal memuat',
+                error: (_, _) => '',
               ),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 12),
@@ -85,33 +99,13 @@ class NotesPage extends ConsumerWidget {
                   itemCount: notes.length,
                   itemBuilder: (context, index) {
                     final note = notes[index];
-                    return ListTile(
-                      title: Text(note.title),
-                      subtitle: Text(
-                        '${note.body}\nDiperbarui: ${note.updatedAt}',
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                      isThreeLine: true,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Ikon Status Sync (Awan)
-                          Icon(
-                            note.dirty ? Icons.cloud_off : Icons.cloud_done,
-                            color: note.dirty ? Colors.orange : Colors.green,
-                          ),
-                          const SizedBox(width: 8),
-                          // Tombol Hapus (Tong Sampah)
-                          IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.grey),
-                            onPressed: () async {
-                              final repo = ref.read(noteRepositoryProvider);
-                              await repo.deleteNote(note.id!);
-                              ref.invalidate(notesProvider); // Refresh list
-                            },
-                          ),
-                        ],
-                      ),
+                    return NoteTile(
+                      note: note,
+                      onDelete: () async {
+                        final repo = ref.read(noteRepositoryProvider);
+                        await repo.deleteNote(note.id!);
+                        ref.invalidate(notesProvider);
+                      },
                     );
                   },
                 );
@@ -124,13 +118,11 @@ class NotesPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () async {
-          final repo = ref.read(noteRepositoryProvider);
-          // Membuat catatan baru secara acak seperti di gambar
-          await repo.addNote(
-            title: 'Catatan Baru ${DateTime.now().second}',
-            body: 'Isi catatan offline-first',
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const NoteDetailPage()),
           );
-          ref.invalidate(notesProvider); // Refresh list
+          ref.invalidate(notesProvider);
         },
       ),
     );
