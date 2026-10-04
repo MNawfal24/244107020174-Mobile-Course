@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../routes.dart';
 
 final _local = FlutterLocalNotificationsPlugin();
 String? pendingDeepLink;
@@ -49,7 +50,7 @@ Future<void> initFcmToken({required Future<void> Function(String token) onToken}
 // 5. Handler Foreground (Praktikum 3)
 void listenForeground(void Function(String route) go) {
   FirebaseMessaging.onMessage.listen((message) async {
-    final route = message.data['route'] ?? '/';
+    final route = routeFromMessage(message.data);
     const androidDetails = AndroidNotificationDetails(
       'pengumuman', 'Pengumuman Kampus',
       importance: Importance.high, priority: Priority.high,
