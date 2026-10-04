@@ -9,10 +9,9 @@ import 'pages/login_page.dart';
 import 'pages/home_page.dart';
 import 'pages/announcement_page.dart';
 
-// Import Praktikum 2
+// Import Praktikum 2 & 3
 import 'messaging/push_service.dart';
 
-// Container untuk menyimpan state
 final container = ProviderContainer();
 
 // Konfigurasi Navigasi
@@ -26,8 +25,8 @@ final router = GoRouter(
     return null;
   },
   routes: [
-   GoRoute(path: '/login', builder: (_, _) => const LoginPage()),
-  GoRoute(path: '/', builder: (_, _) => const HomePage()),
+    GoRoute(path: '/login', builder: (_, _) => const LoginPage()),
+    GoRoute(path: '/', builder: (_, _) => const HomePage()),
     GoRoute(
       path: '/pengumuman/:id',
       builder: (_, s) => AnnouncementPage(id: s.pathParameters['id'] ?? ''),
@@ -36,14 +35,12 @@ final router = GoRouter(
 );
 
 void main() async {
-  // Wajib sebelum inisialisasi Firebase
+  // Syarat Wajib sebelum inisialisasi Firebase
   WidgetsFlutterBinding.ensureInitialized();
-
-  //Daftarjan background handler (Praktikum 3)
-  registerBackgroundHandler();
-  
-  // Inisialisasi Firebase (Praktikum 2)
   await Firebase.initializeApp();
+
+  // Daftarkan Background Handler (Praktikum 3)
+  registerBackgroundHandler();
 
   // Inisialisasi Notifikasi (Praktikum 2)
   await requestNotificationPermission();
@@ -52,10 +49,10 @@ void main() async {
   // Ambil Token FCM (Praktikum 2)
   await initFcmToken(onToken: (token) async {
     final displayToken = token.length > 12 ? '${token.substring(0, 12)}...' : token;
-    debugPrint('FCM Token: $displayToken'); 
+    debugPrint('FCM Token: $displayToken');
   });
 
-  // Menangani klik notifikasi agar pindah halaman via GoRouter
+  // Navigasi saat Notifikasi Diklik (Praktikum 3)
   listenForeground((route) => router.go(route));
   await handleTerminated((route) => router.go(route));
 
