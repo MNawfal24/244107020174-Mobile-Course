@@ -38,6 +38,9 @@ final router = GoRouter(
 void main() async {
   // Wajib sebelum inisialisasi Firebase
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Daftarjan background handler (Praktikum 3)
+  registerBackgroundHandler();
   
   // Inisialisasi Firebase (Praktikum 2)
   await Firebase.initializeApp();
@@ -51,6 +54,10 @@ void main() async {
     final displayToken = token.length > 12 ? '${token.substring(0, 12)}...' : token;
     debugPrint('FCM Token: $displayToken'); 
   });
+
+  // Menangani klik notifikasi agar pindah halaman via GoRouter
+  listenForeground((route) => router.go(route));
+  await handleTerminated((route) => router.go(route));
 
   // Jalankan Aplikasi
   runApp(
