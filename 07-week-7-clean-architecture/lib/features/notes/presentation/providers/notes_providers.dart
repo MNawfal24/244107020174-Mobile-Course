@@ -1,16 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 import '../../data/repositories/note_repository_impl.dart';
 import '../../domain/repositories/note_repository.dart';
 import '../../domain/usecases/get_notes.dart';
 import '../../domain/entities/note.dart';
 
+void initializeNotesDatabase() {
+  if (kIsWeb) {
+    databaseFactory = databaseFactoryFfiWebNoWebWorker;
+  }
+}
+
 // Fungsi pembuka database SQLite lokal untuk fitur Notes
 Future<Database> openNotesDb() async {
-  final dbPath = await getDatabasesPath();
-  final path = join(dbPath, 'notes_database.db');
+  final path = kIsWeb
+      ? 'notes_database.db'
+      : join(await getDatabasesPath(), 'notes_database.db');
 
   return openDatabase(
     path,

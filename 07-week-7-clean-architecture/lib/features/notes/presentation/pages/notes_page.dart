@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/notes_providers.dart';
-import '../../domain/entities/note.dart';
 
 class NotesPage extends ConsumerWidget {
   const NotesPage({super.key});
@@ -9,10 +8,15 @@ class NotesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(notesProvider);
+    
     return Scaffold(
-      appBar: AppBar(title: const Text('Catatan')),
+      // 1. Judul AppBar sesuai instruksi
+      appBar: AppBar(title: const Text('Catatan Clean Architecture')),
+      
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
+        
+        // Mengganti ErrorView yang error dengan UI bawaan Flutter
         error: (e, _) => Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -26,6 +30,8 @@ class NotesPage extends ConsumerWidget {
             ],
           ),
         ),
+        
+        // Mengganti NotesList yang error dengan ListView.builder bawaan Flutter
         data: (notes) => notes.isEmpty
             ? const Center(child: Text('Belum ada catatan.'))
             : ListView.builder(
@@ -33,7 +39,7 @@ class NotesPage extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final note = notes[index];
                   return ListTile(
-                    title: Text(note.title),
+                    title: Text(note.title, style: const TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text(note.body),
                   );
                 },
