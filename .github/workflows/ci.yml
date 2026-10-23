@@ -1,0 +1,90 @@
+name: CI
+
+on: 
+  pull_request:
+    paths:
+      - '**.dart'
+      - 'pubspec.yaml'
+      - '.github/workflows/ci.yml'
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        flutter-version: ['3.24.0']
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          cache: true
+
+      - name: Get dependencies
+        run: |
+          for dir in */; do
+            if [ -f "$dir/pubspec.yaml" ]; then
+              echo "Getting dependencies in $dir..."
+              cd "$dir"
+              flutter pub get
+              cd ..
+            fi
+          done
+
+      - name: Format check
+        run: |
+          echo "Checking code formatting..."
+          dart format --output=none --set-exit-if-changed . || {
+            echo "❌ Code not formatted. Run: dart format ."
+            exit 1
+          }
+
+      - name: Static analysis
+        run: |
+          echo "Running static analysis..."
+          flutter analyze || {
+            echo "❌ Analysis failed."
+            exit 1
+          }
+
+      - name: Run tests
+        run: |
+          echo "Running unit and widget tests..."
+          flutter test || {
+            echo "❌ Tests failed."
+            exit 1
+          }
+
+      - name: Success summary
+        if: success()
+        run: |
+          echo "✅ All checks passed!"
+          echo "  - Format: OK"
+          echo "  - Analysis: OK"
+          echo "  - Tests: OK"
+
+  pr-comment:
+    runs-on: ubuntu-latest
+    needs: analyze-and-test
+    if: always()
+    
+    steps:
+      - name: Comment PR result
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ needs.analyze-and-test.result }}';
+            const emoji = status === 'success' ? '✅' : '❌';
+            const message = `${emoji} CI Check: ${status.toUpperCase()}\n\nRun analyze, format, and tests on all project folders.`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
