@@ -94,15 +94,6 @@ develop (integrasi mingguan)
   └─→ fix/auth-crash
 ```
 
-**Step yang sudah dilakukan (lokal):**
-
-1. ✅ Buat file `docs/review-checklist.md` di `08-week-8-mid-project-review/`
-2. ✅ Dokumentasikan audit commit Week 7
-3. **Siap:** Branch `develop` akan dibuat dari `main`
-4. **Siap:** Branch `feat/week8-audit` akan dibuat dari `develop`
-5. **Siap:** File akan di-commit dengan pesan conventional: `docs(review): audit commit Week 7 + perbaikan`
-6. **Siap:** Push ke remote (menunggu approval sebelum push)
-
 ---
 
 ## File yang Dibuat
@@ -119,12 +110,12 @@ develop (integrasi mingguan)
 
 | Aspek | Status | Catatan |
 |-------|--------|---------|
-| **Commit Convention** | ❌ Belum | Perlu perbaikan format (`feat`, `fix`, `refactor`) |
-| **Branch Model** | ❌ Belum | Hanya `main`, perlu buat `develop` |
-| **Peer Review** | ⏳ Pending | Akan dilakukan di Praktikum 2 |
-| **Static Analysis** | ? | Perlu cek `flutter analyze` dan `flutter test` |
-| **CI Pipeline** | ❌ Belum | Perlu setup GitHub Actions |
-| **Issue Tracking** | ❌ Belum | Tidak ada issue tracking reference di commit |
+| **Commit Convention** |  Belum | Perlu perbaikan format (`feat`, `fix`, `refactor`) |
+| **Branch Model** |  Belum | Hanya `main`, perlu buat `develop` |
+| **Peer Review** |  Pending | Akan dilakukan di Praktikum 2 |
+| **Static Analysis** | siap | Perlu cek `flutter analyze` dan `flutter test` |
+| **CI Pipeline** |  Belum | Perlu setup GitHub Actions |
+| **Issue Tracking** |  Belum | Tidak ada issue tracking reference di commit |
 
 ---
 
@@ -143,15 +134,3 @@ develop (integrasi mingguan)
 
 ---
 
-## Referensi
-
-- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Atlassian: GitFlow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
-- [GitHub: Pull Request Reviews](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
-- [Dart: Linter Rules](https://dart.dev/tools/linter-rules)
-- [Flutter: Static Analysis](https://docs.flutter.dev/tools/using-ide)
-
----
-
-**Dibuat:** 2026-10-23  
-**Status:** Praktikum 1 (No. 1, No. 2, No. 3) selesai secara lokal di branch `feat/week8-audit`.
