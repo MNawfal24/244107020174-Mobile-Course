@@ -131,13 +131,12 @@ develop (integrasi mingguan)
 ## Next Steps (Praktikum 1 Lanjutan)
 
 ### Praktikum 1 No. 2: Buat Branch Kerja yang Benar
-- [ ] Buat branch `develop` dari `main`
-- [ ] Buat branch `feat/week8-audit` dari `develop`
-- [ ] Commit file `review-checklist.md` dengan pesan: `docs(review): audit commit Week 7 + perbaikan`
-- [ ] Push ke remote (branch `feat/week8-audit`)
+- [x] Buat branch `develop` dari `main`
+- [x] Buat branch `feat/week8-audit` dari `develop`
+- [x] Commit file `review-checklist.md` dengan pesan conventional: `docs(review): audit commit Week 7 + perbaikan convention`
 
 ### Praktikum 1 No. 3: Perbaiki Satu Commit Buruk
-- [ ] Buat file `docs/commit-refactoring.md` yang menunjukkan:
+- [x] Buat file `docs/commit-refactoring.md` yang menunjukkan:
   - Tabel sebelum/sesudah 3 commit lama
   - Alasan perbaikan
   - Bukti perbaikan
@@ -155,4 +154,4 @@ develop (integrasi mingguan)
 ---
 
 **Dibuat:** 2026-10-23  
-**Status:** Praktikum 1 No. 1 selesai, siap Praktikum 1 No. 2
+**Status:** Praktikum 1 (No. 1, No. 2, No. 3) selesai secara lokal di branch `feat/week8-audit`.
