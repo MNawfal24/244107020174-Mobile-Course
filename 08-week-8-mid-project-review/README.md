@@ -1,136 +1,73 @@
-# Week 8 - Mid Project Review & Code Review
-
-**Praktikum:** Audit Riwayat, GitFlow Branching, Commit Convention, dan Peer Code Review
-
-**Repository:** [244107020174-Mobile-Course](https://github.com/MNawfal24/244107020174-Mobile-Course)
-
-**Target Project:** Week 7 Clean Architecture (`07-week-7-clean-architecture`)
+# Laporan Praktikum Minggu 8 - Mid Project Review & Code Review
 
 ---
 
-## Praktikum 1: Audit Riwayat & Simulasi Branching
-
-### 1.1 Audit Git History Week 7
-
-**Perintah yang dijalankan:**
-```bash
-git log --oneline -15
-git branch -a
-git status
-```
-
-**Hasil Audit:**
-
-#### Git Log (15 commit terakhir)
-```
-60271ac Final Commit
-2d63f8e Commit praktikum 1-3
-e8a9e89 Commit Akhir
-d04de85 Commit Refactoring
-89df1ee Commit AI Challenge
-744e6d3 Commit Prakikum 3
-fea7c00 Commit Praktikum 2
-3ab42af Praktikum 1
-1cff4ca commit awal
-1ca22e8 Commit Akhir setelah aplikasi bisa di run di handphone
-1af7668 commit Pembenaran Sehingga bisa Run di handPhone
-7337856 Commit Finalll
-6717b3c Commit Final
-7914c5e Commit Praktikum 2
-e35f9a4 Commit Praktikum 1
-```
-
-#### Branch Status
-```
-* main
-  remotes/244107020174-Mobile-Course/main
-```
-
-**Masalah yang ditemukan:**
-- ❌ Hanya ada branch `main`, belum ada `develop`
-- ❌ 11 dari 15 commit tidak ikuti conventional commits (tidak ada prefix `feat`, `fix`, `refactor`, dll)
-- ❌ Semua commit tidak memiliki scope (modul/layer mana yang berubah)
-- ❌ Pesan commit generik: "Final Commit", "Akhir", "Finalll" → tidak jelas perubahan apa
-- ❌ Tidak ada issue tracking reference (`Closes #X`)
-- ❌ Banyak commit berulang dengan nama sama ("Commit Final", "Commit Akhir")
+## Identitas Mahasiswa 
+* **Nama:** Muhammad Nawfal Mawla Azhar
+* **NIM:** 244107020174
+* **Kelas:** 3G-TI
 
 ---
 
-### 1.2 Perbaikan Commit Messages (Simulasi)
+## Ringkasan Praktikum
 
-Tabel perbaikan commit messages lama ke format conventional commits:
+Praktikum Minggu 8 berfokus pada kolaborasi profesional, GitFlow branching model, code review terstruktur, static analysis & CI, serta AI-assisted review yang bertanggung jawab.
 
-| Commit Lama | Hash | Masalah | Commit Diperbaiki | Alasan |
-|-------------|------|---------|-------------------|--------|
-| `Final Commit` | 60271ac | Tidak spesifik, tanpa tipe/scope | `feat(notes): implementasi Clean Architecture + unit tests` | Jelas: tipe (feat), scope (notes), perubahan (Clean Arch), bukti (tests) |
-| `Commit Refactoring` | d04de85 | Vague, tidak jelas refactor apa | `refactor(data): pisahkan repository dari data source + DI` | Jelas: layer (data), detail refactor (pemisahan concern), pola (DI) |
-| `Commit Akhir setelah aplikasi bisa di run di handphone` | 1ca22e8 | Terlalu panjang, tidak terstruktur, tanpa tipe | `fix(android): sesuaikan gradle minSdkVersion untuk device` | Jelas: tipe (fix), platform (android), masalah + solusi spesifik |
+### 1. Praktikum 1: Audit Riwayat & Branching Model
+- Melakukan audit 15 commit terakhir project Week 7 (`07-week-7-clean-architecture`).
+- Menemukan 11 commit non-konvensional (seperti "Final Commit", "Commit Akhir").
+- Membuat branch `develop` dari `main` serta branch `feat/week8-audit` untuk isolasi pekerjaan.
+- Mendokumentasikan perbaikan commit message ke format conventional commits pada `docs/commit-refactoring.md` dan `docs/review-checklist.md`.
 
-**Format Conventional Commits yang digunakan:**
-```
-<tipe>(<scope>): <deskripsi singkat> + <bukti>
+### 2. Praktikum 2: Pull Request & Peer Code Review
+- Menyusun template Pull Request standar di `docs/pr-template.md`.
+- Menyusun checklist peer review dengan minimal 5 temuan di `docs/peer-review-checklist.md`.
+- Mendokumentasikan pola komentar review yang konstruktif (observasi → dampak → usulan) di `docs/review-comments-example.md`.
+- Mencatat log keputusan review (approve & merge reasoning) di `docs/pr-decision-log.md`.
 
-Tipe: feat, fix, refactor, test, docs, chore
-Scope: layer/modul yang berubah (notes, auth, data, presentation, dll)
-Deskripsi: singkat, jelas, imperatif
-Bukti: mention test, PR, atau perubahan terukur
-```
+### 3. Praktikum 3: Static Analysis, CI & Penilaian Kesiapan
+- Menjalankan pemeriksaan mesin: `flutter analyze`, `dart format`, dan `flutter test` di project Week 7.
+- Membuat file konfigurasi GitHub Actions CI pada `.github/workflows/ci.yml`.
+- Menguji sterilitas Clean Architecture Week 7 menggunakan grep di `docs/grep-sterilitas-week7.md` (Skor sterilitas: 98%).
+- Menyusun laporan analisis statis di `docs/static-analysis-report.md`.
 
----
-
-### 1.3 GitFlow Branching Model (Simulasi Lokal)
-
-**Alur kerja yang benar:**
-
-```
-main (protected)
-  ↓
-develop (integrasi mingguan)
-  ├─→ feature/week8-audit (branch kerja sementara)
-  │   ├─ docs/review-checklist.md
-  │   └─ commit: "docs(review): audit commit Week 7 + perbaikan"
-  │
-  ├─→ feature/notes-validation
-  └─→ fix/auth-crash
-```
+### 4. AI Challenge: AI-assisted Review
+- Mengirimkan prompt review dengan kriteria spesifik ke AI Senior Flutter Dev (`docs/ai-review-prompt.md`).
+- Menampung 5 temuan dari AI pada `docs/ai-review-output.md`.
+- Melakukan verifikasi manual dan mendokumentasikan tabel keputusan akhir di `docs/ai-review-vs-keputusan.md`.
 
 ---
 
-## File yang Dibuat
+## Refleksi
 
-### `docs/review-checklist.md`
-- Tabel audit commit messages (3 contoh perbaikan)
-- 4 temuan masalah commit history
-- Action items (setup branch, CI, issue tracking)
-- Checklist kesiapan mid semester
+### 1. Apa beda LGTM buta dengan approve yang bertanggung jawab? Apa risikonya bagi tim?
 
----
+LGTM (Looks Good To Me) buta terjadi ketika reviewer menyetujui Pull Request tanpa benar-benar membaca kode, menguji aplikasi secara lokal, atau memeriksa alur eksekusi dan test. Approve yang bertanggung jawab membutuhkan proses pull kode ke lokal, pengujian manual minimal 5 menit, pengecekan ketaatan arsitektur, serta verifikasi bahwa automated test dan linter berjalan hijau. Risiko bagi tim jika terjadi LGTM buta adalah bug lolos ke branch utama/produksi, celah keamanan terbuka, rusaknya aturan arsitektur (seperti import antar layer yang terlarang), dan menumpuknya utang teknis (technical debt) yang sulit diperbaiki di kemudian hari.
 
-## Status Kesiapan Mid Semester Week 7
+### 2. Kapan komentar wajib berstatus request changes, dan kapan cukup saran?
 
-| Aspek | Status | Catatan |
-|-------|--------|---------|
-| **Commit Convention** |  Belum | Perlu perbaikan format (`feat`, `fix`, `refactor`) |
-| **Branch Model** |  Belum | Hanya `main`, perlu buat `develop` |
-| **Peer Review** |  Pending | Akan dilakukan di Praktikum 2 |
-| **Static Analysis** | siap | Perlu cek `flutter analyze` dan `flutter test` |
-| **CI Pipeline** |  Belum | Perlu setup GitHub Actions |
-| **Issue Tracking** |  Belum | Tidak ada issue tracking reference di commit |
+Komentar wajib berstatus **Request Changes** apabila ditemukan *blocker* atau kesalahan kritis, seperti:
+- Bug yang menyebabkan crash atau data hilang/rusak.
+- Pelanggaran aturan dependensi arsitektur (misal: domain meng-import presentation/data/Flutter).
+- Kegagalan unit test atau linter/analyze yang belum diperbaiki.
+- Celah keamanan yang membahayakan aplikasi.
 
----
+Sebaliknya, komentar cukup berupa **Saran (Comment/Suggestion)** apabila hanya berhubungan dengan:
+- Peningkatan keterbacaan kode (readability) yang tidak krusial.
+- Saran refactoring minor yang sifatnya opsional.
+- Ide atau gagasan fitur/fitur tambahan untuk iterasi atau PR berikutnya.
 
-## Next Steps (Praktikum 1 Lanjutan)
+### 3. Bagian mana dari review AI yang Anda tolak atau sederhanakan, dan mengapa?
 
-### Praktikum 1 No. 2: Buat Branch Kerja yang Benar
-- [x] Buat branch `develop` dari `main`
-- [x] Buat branch `feat/week8-audit` dari `develop`
-- [x] Commit file `review-checklist.md` dengan pesan conventional: `docs(review): audit commit Week 7 + perbaikan convention`
+Seluruh 5 temuan utama dari review AI diperiksa dan diverifikasi secara manual:
+- Temuan Blocker/Critical (mengenai kesalahan nama class `GetNotes` pada file `add_note.dart` dan duplikasi class) diterima sepenuhnya karena merupakan bug nyata.
+- Namun, saran AI untuk merestrukturisasi penempatan Dependency Injection (DI) dari presentation ke `core/` dan penambahan unit test yang sangat ekstensif disederhanakan/ditandai sebagai **Future Enhancement**.
+- Alasan penyederhanaan: Untuk ruang lingkup tugas mid-semester ini, struktur DI yang ada di presentation provider masih cukup pragmatis dan tidak mengganggu fungsionalitas utama aplikasi. Implementasi unit test yang komprehensif diprioritaskan untuk modul testing mendatang (Minggu 12) agar tidak membengkakkan skala PR saat ini.
 
-### Praktikum 1 No. 3: Perbaiki Satu Commit Buruk
-- [x] Buat file `docs/commit-refactoring.md` yang menunjukkan:
-  - Tabel sebelum/sesudah 3 commit lama
-  - Alasan perbaikan
-  - Bukti perbaikan
+### 4. Satu hal konkret yang Anda perbaiki setelah review sejawat — apa dampaknya?
 
----
-
+Hal konkret yang diperbaiki adalah perbaikan nama class usecase pada file `add_note.dart` yang sebelumnya bertuliskan `class GetNotes` akibat duplikasi/copy-paste error.
+**Dampaknya:**
+- Menghilangkan ambiguitas import class `GetNotes` di dua tempat berbeda.
+- Memastikan modul pembuatan catatan (`AddNote`) memiliki tanggung jawab dan identitas yang jelas sesuai prinsip Single Responsibility Principle (SRP).
+- Mencegah timbulnya bug runtime atau salah panggil fungsionalitas saat menambahkan catatan baru.
