@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/providers.dart';
-import '../data/local/note.dart';
-import '../widgets/note_title.dart';
+import '../widgets/notes_body.dart';
+import '../widgets/notes_search_field.dart';
 import 'notes_detail_page.dart';
 import 'setting_page.dart';
 import 'settings_page.dart';
-
-// Provider untuk mengambil daftar catatan dari SQLite
-final notesProvider = FutureProvider.autoDispose<List<Note>>((ref) async {
-  final repo = ref.watch(noteRepositoryProvider);
-  return repo.fetchNotes();
-});
 
 // Provider untuk waktu terakhir dibuka dari SharedPreferences
 final lastOpenedProvider = FutureProvider.autoDispose<String?>((ref) async {
@@ -26,13 +20,16 @@ class NotesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notesAsync = ref.watch(notesProvider);
     final lastOpenedAsync = ref.watch(lastOpenedProvider);
     final isDarkMode = ref.watch(darkModeProvider).value ?? false;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Offline Notes'),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: NotesSearchField(),
+        ),
         actions: [
           // Tombol Dark Mode
           IconButton(
@@ -48,7 +45,7 @@ class NotesPage extends ConsumerWidget {
               final repo = ref.read(noteRepositoryProvider);
               await syncNotes(repo);
               if (!context.mounted) return;
-              ref.invalidate(notesProvider); // Refresh UI setelah sync
+              ref.read(notesListNotifierProvider.notifier).loadNotes();
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Sinkronisasi selesai!')),
               );
@@ -75,8 +72,8 @@ class NotesPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               lastOpenedAsync.when(
-                data: (date) => date != null 
-                    ? 'Terakhir dibuka: $date' 
+                data: (date) => date != null
+                    ? 'Terakhir dibuka: $date'
                     : 'Terakhir dibuka: Belum pernah',
                 loading: () => 'Memuat...',
                 error: (_, _) => '',
@@ -85,33 +82,9 @@ class NotesPage extends ConsumerWidget {
               style: const TextStyle(fontSize: 12),
             ),
           ),
-          
+
           // Daftar Catatan
-          Expanded(
-            child: notesAsync.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, _) => Center(child: Text('Error: $err')),
-              data: (notes) {
-                if (notes.isEmpty) {
-                  return const Center(child: Text('Belum ada catatan.'));
-                }
-                return ListView.builder(
-                  itemCount: notes.length,
-                  itemBuilder: (context, index) {
-                    final note = notes[index];
-                    return NoteTile(
-                      note: note,
-                      onDelete: () async {
-                        final repo = ref.read(noteRepositoryProvider);
-                        await repo.deleteNote(note.id!);
-                        ref.invalidate(notesProvider);
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
+          const Expanded(child: NotesBody()),
         ],
       ),
       // Tombol Tambah Catatan (FAB)
@@ -122,7 +95,7 @@ class NotesPage extends ConsumerWidget {
             context,
             MaterialPageRoute(builder: (_) => const NoteDetailPage()),
           );
-          ref.invalidate(notesProvider);
+          ref.read(notesListNotifierProvider.notifier).loadNotes();
         },
       ),
     );

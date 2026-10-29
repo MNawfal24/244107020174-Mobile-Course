@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../domain/search_notes.dart';
+import 'local/note.dart';
 import 'repositories/note_repository.dart';
 // Import file terkait lainnya yang sudah Anda miliki
 
@@ -41,3 +43,60 @@ Future<int> syncNotes(NoteRepository repo) async {
 final noteRepositoryProvider = Provider<NoteRepository>((ref) {
   return NoteRepository();
 });
+
+// ---------------------------------------------------------
+// [MINGGU 9] Provider Search & Notes List Notifier
+// ---------------------------------------------------------
+final searchNotesUseCaseProvider = Provider<SearchNotes>((ref) {
+  return SearchNotes(ref.watch(noteRepositoryProvider));
+});
+
+final searchQueryProvider = NotifierProvider<SearchQueryNotifier, String>(
+  SearchQueryNotifier.new,
+);
+
+class SearchQueryNotifier extends Notifier<String> {
+  @override
+  String build() => '';
+
+  void setQuery(String value) => state = value;
+}
+
+final notesListNotifierProvider =
+    AsyncNotifierProvider<NotesListNotifier, List<Note>>(
+  NotesListNotifier.new,
+);
+
+class NotesListNotifier extends AsyncNotifier<List<Note>> {
+  int _searchVersion = 0;
+
+  @override
+  Future<List<Note>> build() => _search('');
+
+  Future<List<Note>> _search(String query) async {
+    final searchNotes = ref.read(searchNotesUseCaseProvider);
+    return searchNotes.call(query);
+  }
+
+  Future<void> loadNotes() async {
+    final version = ++_searchVersion;
+    state = const AsyncLoading();
+    final nextState = await AsyncValue.guard(
+      () => _search(ref.read(searchQueryProvider)),
+    );
+    if (version == _searchVersion) state = nextState;
+  }
+
+  Future<void> search(String query) async {
+    final version = ++_searchVersion;
+    ref.read(searchQueryProvider.notifier).setQuery(query);
+    final nextState = await AsyncValue.guard(() => _search(query));
+    if (version == _searchVersion) state = nextState;
+  }
+
+  Future<void> deleteNote(int id) async {
+    final repo = ref.read(noteRepositoryProvider);
+    await repo.deleteNote(id);
+    await loadNotes();
+  }
+}
