@@ -21,7 +21,7 @@ class GeminiRepositoryImpl implements GeminiRepository {
   final String _apiKey;
   final http.Client _client;
   static const _baseUrl =
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent';
 
   @override
   Future<String> generateResponse(
