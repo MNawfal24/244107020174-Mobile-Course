@@ -116,6 +116,14 @@ Test coverage:
 - ChatMessage entity operations
 - Custom exception messages
 
+## ScreenShoot
+
+![UI Sebelum ada API]
+> ![ScreenShoot](screenshoots/SebelumAPI.png)
+
+![UI Setelah ada API]
+> ![ScreenShoot](screenshoots/SetelahAPI.png)
+
 ## Referensi
 
 - [Google Gemini API Docs](https://ai.google.dev/gemini-api/docs)
