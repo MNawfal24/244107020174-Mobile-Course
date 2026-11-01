@@ -124,6 +124,6 @@ Test coverage:
 
 ---
 
-**Developer**: Muhammad Nawfal Mawla Azhar (244107020174)  
+**Nama**: Muhammad Nawfal Mawla Azhar (244107020174)  
 **Kelas**: TI-3G  
-**Mata Kuliah**: Pemrograman Mobile
+**NIM**: 244107020174
