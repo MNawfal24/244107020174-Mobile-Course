@@ -3,7 +3,6 @@
 **Nama:** Muhammad Nawfal Mawla Azhar  
 **NIM:** 244107020174  
 **Kelas:** TI-3G  
-**Proyek:** NoteMind AI (`11-week-11-performance-optimization`)
 
 ---
 
@@ -58,12 +57,11 @@ Aplikasi diuji dalam mode `--profile` menggunakan Flutter DevTools dengan skenar
 ### 1. Profiling Sebelum Optimasi (Baseline)
 > Flame Chart sebelum optimasi menunjukkan rata-rata frame time 24.8 ms dengan 16 frame drop (jank). UI thread terbebani oleh build berulang seluruh halaman `StudyAiPage`, dan Raster thread memakan waktu 10.4 ms akibat re-paint seluruh listview.
 
-![Flame Chart Sebelum Optimasi](screenshots/before-profile.png)
-
+![ScreenShoot](screenshots/before-profile.png)
 ### 2. Profiling Sesudah Optimasi (Verified)
 > Flame Chart setelah optimasi menunjukkan frame time rata-rata turun ke 6.5 ms (stabil di bawah batas 16.6 ms). `RepaintBoundary` mengisolasi raster paint menjadi hanya 2.1 ms tanpa jank frame (0.0%).
 
-![Flame Chart Sesudah Optimasi](screenshots/after-profile.png)
+![ScreenShoot](screenshots/after-profile.png)
 
 ### 3. Tampilan Aplikasi NoteMind AI
 | Sebelum Pengaturan API | Berinteraksi dengan Tutor AI |
